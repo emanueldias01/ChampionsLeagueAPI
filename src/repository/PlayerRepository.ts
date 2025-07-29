@@ -95,6 +95,21 @@ class PlayerRepository {
     rawPlayers.push(player);
     return player;
   }
+
+  async updatePlayer(player : Player) : Promise<Player | null>{
+    const search = rawPlayers.find(p => p.id === player.id);
+    if(!search) return null;
+
+    search.name = player.name;
+    search.club = player.club;
+    search.minutes_played = player.minutes_played;
+    search.goals = player.goals;
+    search.nationality = player.nationality;
+    search.position = player.position;
+    search.awards = player.awards;
+
+    return search;
+  }
 }
 
 export default PlayerRepository;

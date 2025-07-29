@@ -30,3 +30,10 @@ export const badRequest = (body : any): HttpResponse => {
         body : body
     }
 }
+
+export const created = (body : any) : HttpResponse => {
+    return{
+        status: 201,
+        body: body
+    }
+}
