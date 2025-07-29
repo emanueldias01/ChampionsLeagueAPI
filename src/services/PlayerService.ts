@@ -42,6 +42,15 @@ class PlayersService{
 
         return badRequest({ message : "erro in try update player" });
     }
+
+    async deletePlayerById(id : number) : Promise<HttpResponse>{
+        const data = await this.repository.deletePlayerById(id);
+        if(data){
+            return noContent();
+        }
+
+        return notFound({ message : "player not found" });
+    }
 }
 
 export default PlayersService;

@@ -110,6 +110,15 @@ class PlayerRepository {
 
     return search;
   }
+
+  async deletePlayerById(id : number) : Promise<Player | null>{
+    const index = rawPlayers.findIndex(p => p.id === id);
+    if(index === -1) return null;
+    const res = rawPlayers[index];
+    rawPlayers.splice(index, 1);
+
+    return res;
+  }
 }
 
 export default PlayerRepository;

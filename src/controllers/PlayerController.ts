@@ -30,4 +30,10 @@ export class PlayersController{
         const response = await this.service.updatePlayer(body);
         res.status(response.status).json(response.body);
     }
+
+    async deletePlayerById(req : Request, res : Response){
+        const id = parseInt(req.params.id);
+        const response = await this.service.deletePlayerById(id);
+        res.status(response.status).json(response.body);
+    }
 }

@@ -14,6 +14,7 @@ class PlayerRoutes{
         routes.get("/players/:id", (req, res) => this.controller.getPlayerById(req, res));
         routes.post("/player", (req, res) => this.controller.createPlayer(req, res));
         routes.put("/player", (req, res) => this.controller.updatePlayer(req, res));
+        routes.delete("/player/:id", (req, res) => this.controller.deletePlayerById(req, res));
 
         return routes;
     }
