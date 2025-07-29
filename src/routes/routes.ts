@@ -1,8 +1,20 @@
 import { Router } from "express";
-import { PlayersController } from "../controllers/PlayersController";
+import { PlayersController } from "../controllers/PlayerController";
 
-const routes = Router();
+class PlayerRoutes{
+    controller: PlayersController;
 
-routes.get("/players", PlayersController.getPlayers);
+    constructor(controller : PlayersController){
+        this.controller = controller
+    }
 
-export default routes;
+    initializePlayerRoutes(){
+        const routes = Router()
+        routes.get("/players", (req, res) => this.controller.getPlayers(req, res));
+        routes.get("/players/:id", (req, res) => this.controller.getPlayerById(req, res));
+
+        return routes;
+    }
+}
+
+export default PlayerRoutes;

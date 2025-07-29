@@ -1,13 +1,27 @@
-import { noContent, ok } from "../utils/HttpResponses";
+import PlayerRepository from "../repository/PlayerRepository";
+import { HttpResponse, noContent, notFound, ok } from "../utils/HttpResponses";
 
 class PlayersService{
-    static async getPlayers(){
-        const data = {name : "Ronaldo"}
+    private repository: PlayerRepository;
+
+    constructor(repository : PlayerRepository){
+        this.repository = repository;
+    }
+    async getPlayers(): Promise<HttpResponse>{
+        const data = await this.repository.getPlayers()
         if(data){
             return ok(data);
         }
 
         return noContent();
+    }
+
+    async getPlayerById(id : number): Promise<HttpResponse>{
+        const data = await this.repository.findPlayerById(id);
+        if(data){
+            return ok(data);
+        }
+        return notFound({ message : "player not found" });
     }
 }
 
