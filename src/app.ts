@@ -1,11 +1,10 @@
 import express, {json, Request, Response} from 'express'
-import { PlayersController } from './controllers/players-controller';
+import routes from './routes/routes';
 
 const createApp = () =>  {
     const app = express();
     app.use(json());
-
-    app.get("/ping", PlayersController.ping);
+    app.use("/api", routes);
 
     return app;
 }
