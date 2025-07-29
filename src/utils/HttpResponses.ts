@@ -23,3 +23,10 @@ export const noContent = (): HttpResponse => {
         body: null
     }
 }
+
+export const badRequest = (body : any): HttpResponse => {
+    return{
+        status: 400,
+        body : body
+    }
+}

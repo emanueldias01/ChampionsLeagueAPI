@@ -18,4 +18,10 @@ export class PlayersController{
         const response = await this.service.getPlayerById(id);
         res.status(response.status).json(response.body);
     }
+
+    async createPlayer(req : Request, res : Response){
+        const body = req.body;
+        const response = await this.service.createPlayer(body);
+        res.status(response.status).json(response.body);
+    }
 }

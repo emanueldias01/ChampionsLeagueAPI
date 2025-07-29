@@ -1,30 +1,100 @@
 import { Player } from "../model/Player";
 
-const rawPlayers = [
-    {id : 1, name : "Messi"},
-    {id : 2, name: "Ronaldo"}
+const rawPlayers: Player[] = [
+  {
+    id: 1,
+    name: "Serhou Guirassy",
+    club: "Borussia Dortmund",
+    nationality: "Guiné-Bissau / França",
+    goals: 13,
+    minutes_played: 1084,
+    position: "Atacante"
+  },
+  {
+    id: 2,
+    name: "Raphinha",
+    club: "Barcelona",
+    nationality: "Brasil",
+    goals: 13,
+    minutes_played: 1225,
+    position: "Atacante"
+  },
+  {
+    id: 3,
+    name: "Robert Lewandowski",
+    club: "Barcelona",
+    nationality: "Polônia",
+    goals: 11,
+    minutes_played: 985,
+    position: "Atacante"
+  },
+  {
+    id: 4,
+    name: "Harry Kane",
+    club: "Bayern Munich",
+    nationality: "Inglaterra",
+    goals: 11,
+    minutes_played: 1120,
+    position: "Atacante"
+  },
+  {
+    id: 5,
+    name: "Lautaro Martínez",
+    club: "Inter Milan",
+    nationality: "Argentina",
+    goals: 9,
+    minutes_played: 857,
+    position: "Atacante"
+  },
+  {
+    id: 6,
+    name: "Ousmane Dembélé",
+    club: "Paris Saint‑Germain",
+    nationality: "França",
+    goals: 8,
+    minutes_played: 1163,
+    position: "Atacante",
+    awards: ["Player of the Season 2024‑25"]
+  },
+  {
+    id: 7,
+    name: "Désiré Doué",
+    club: "Paris Saint‑Germain",
+    nationality: "França",
+    position: "Meia / Atacante",
+    awards: ["Young Player of the Season 2024‑25"]
+  },
+  {
+    id: 8,
+    name: "Lamine Yamal",
+    club: "Barcelona",
+    nationality: "Espanha",
+    position: "Atacante / Meia"
+  }
 ];
 
-class PlayerRepository{
-    async getPlayers(): Promise<Player[]>{
-        const players : Player[] = rawPlayers.map(p => ({
-            id : p.id,
-            name : p.name
-        }));
+class PlayerRepository {
+  async getPlayers(): Promise<Player[]> {
+    return rawPlayers.map(p => ({
+      id: p.id,
+      name: p.name,
+      club: p.club,
+      nationality: p.nationality,
+      position: p.position
+    }));
+  }
 
-        return players;
-    }
+  async findPlayerById(id: number): Promise<Player | null> {
+    const player = rawPlayers.find(p => p.id === id);
+    return player ?? null;
+  }
 
-    async findPlayerById(id : number): Promise<Player | null>{
-        const index = rawPlayers.findIndex(p => p.id === id);
-
-        if(index === -1) return null;
-
-        return {
-            id: rawPlayers[index].id,
-            name: rawPlayers[index].name
-        }
-    }
+  async createPlayer(player : Player) : Promise<Player | null>{
+    const search = rawPlayers.find(p => p.name === player.name || p.id === player.id);
+    if(search) return null;
+    rawPlayers.push(player);
+    return player;
+  }
 }
 
 export default PlayerRepository;
