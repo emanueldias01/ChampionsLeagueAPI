@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "tsx --env-file=.env ./src/server.ts",
     "build": "tsup ./src",
-    "up" : "node --env-file=.env ./dist/server.js"
+    "up" : "node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
